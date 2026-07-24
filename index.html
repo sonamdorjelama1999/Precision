@@ -302,6 +302,80 @@
   .details-toggle[open] summary::before{transform:rotate(90deg);}
   .details-toggle summary:hover{color:var(--text-dim);}
 
+  /* ---- site-level tabs ---- */
+  .site-tabs{
+    display:flex;gap:8px;margin:28px 0 24px;
+  }
+  .site-tab-btn{
+    background:none;border:1px solid var(--line);color:var(--text-faint);
+    font-family:'Oswald', sans-serif;font-weight:600;
+    font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+    padding:10px 18px;cursor:pointer;border-radius:2px;
+    transition:color .15s ease,border-color .15s ease;
+  }
+  .site-tab-btn:hover{color:var(--text-dim);}
+  .site-tab-btn.active{color:var(--amber);border-color:var(--amber);background:rgba(255,176,32,.06);}
+
+  .site-panel{display:none;}
+  .site-panel.active{display:block;}
+
+  /* ---- goal stats page ---- */
+  .stat-summary{
+    display:grid;grid-template-columns:repeat(3, 1fr);gap:12px;margin-bottom:24px;
+  }
+  .stat-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:2px;
+    padding:16px;text-align:center;
+  }
+  .stat-card .num{
+    font-family:'Oswald', sans-serif;font-weight:700;font-size:28px;color:var(--amber);
+  }
+  .stat-card .lbl{
+    font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);
+    margin-top:6px;
+  }
+
+  .scorers-board{
+    background:var(--surface);border:1px solid var(--line);border-radius:2px;
+    padding:20px 22px;margin-bottom:16px;
+  }
+  .board-title{
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);
+    margin-bottom:16px;
+  }
+  .board-row{
+    display:flex;align-items:center;gap:12px;padding:10px 0;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .board-row:last-child{border-bottom:none;}
+  .board-rank{
+    font-family:'Oswald', sans-serif;font-weight:700;font-size:14px;color:var(--text-faint);
+    min-width:20px;
+  }
+  .board-name{flex:1;font-size:14px;color:var(--text);}
+  .board-bar-wrap{flex:1;height:6px;background:var(--line-soft);border-radius:3px;overflow:hidden;}
+  .board-bar{height:100%;background:var(--amber);}
+  .board-goals{
+    font-family:'Oswald', sans-serif;font-weight:700;font-size:14px;color:var(--amber);
+    min-width:24px;text-align:right;
+  }
+
+  .goals-by-match{
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .gbm-row{
+    display:flex;align-items:center;gap:12px;font-size:12px;color:var(--text-dim);
+  }
+  .gbm-date{min-width:110px;color:var(--text-faint);}
+  .gbm-bars{flex:1;display:flex;gap:2px;height:16px;}
+  .gbm-for{background:var(--amber);height:100%;}
+  .gbm-against{background:var(--line);height:100%;}
+  .gbm-score{min-width:56px;text-align:right;color:var(--text);}
+
+  .stats-note{
+    font-size:11px;color:var(--text-faint);margin-top:14px;line-height:1.6;
+  }
+
   footer{
     margin-top:48px;padding-top:20px;border-top:1px solid var(--line);
     display:flex;justify-content:space-between;align-items:center;
@@ -341,6 +415,12 @@
     </div>
   </header>
 
+  <div class="site-tabs">
+    <button class="site-tab-btn active" onclick="showSiteTab(this,'site-fixtures')">Fixtures</button>
+    <button class="site-tab-btn" onclick="showSiteTab(this,'site-stats')">Goal stats</button>
+  </div>
+
+  <div id="site-fixtures" class="site-panel active">
   <div class="fixtures">
 
     <!-- Next match : upcoming (featured) -->
@@ -601,6 +681,96 @@
     </div>
 
   </div>
+  </div>
+
+  <div id="site-stats" class="site-panel">
+
+    <div class="stat-summary">
+      <div class="stat-card">
+        <div class="num">22</div>
+        <div class="lbl">Goals scored</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">21</div>
+        <div class="lbl">Goals conceded</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">2</div>
+        <div class="lbl">Matches played</div>
+      </div>
+    </div>
+
+    <div class="scorers-board">
+      <div class="board-title">Top scorers — Precision FC</div>
+      <div class="board-row">
+        <div class="board-rank">1</div>
+        <div class="board-name">Ashok</div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:100%"></div></div>
+        <div class="board-goals">3</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">1</div>
+        <div class="board-name">Santosh Dai</div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:100%"></div></div>
+        <div class="board-goals">3</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">3</div>
+        <div class="board-name">Messi</div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
+        <div class="board-goals">1</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">3</div>
+        <div class="board-name">Dhurge</div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
+        <div class="board-goals">1</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">3</div>
+        <div class="board-name">Anish Bhai</div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
+        <div class="board-goals">1</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">3</div>
+        <div class="board-name">Dev bhai</div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
+        <div class="board-goals">1</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">3</div>
+        <div class="board-name">Sudip</div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
+        <div class="board-goals">1</div>
+      </div>
+      <div class="stats-note">Based on the goal-by-goal breakdown recorded for the Jul 23 match against Thanka FC. The Jul 22 match wasn't logged by individual scorer, so its 11 goals aren't reflected in this leaderboard.</div>
+    </div>
+
+    <div class="scorers-board">
+      <div class="board-title">Goals by match</div>
+      <div class="goals-by-match">
+        <div class="gbm-row">
+          <div class="gbm-date">Jul 22 · Gokarneswor</div>
+          <div class="gbm-bars">
+            <div class="gbm-for" style="flex:11"></div>
+            <div class="gbm-against" style="flex:13"></div>
+          </div>
+          <div class="gbm-score">11–13</div>
+        </div>
+        <div class="gbm-row">
+          <div class="gbm-date">Jul 23 · Thanka</div>
+          <div class="gbm-bars">
+            <div class="gbm-for" style="flex:11"></div>
+            <div class="gbm-against" style="flex:8"></div>
+          </div>
+          <div class="gbm-score">11–8</div>
+        </div>
+      </div>
+      <div class="stats-note"><span style="color:var(--amber)">■</span> Goals for &nbsp; <span style="color:var(--line-soft)">■</span> Goals against</div>
+    </div>
+
+  </div>
 
   <footer>
     <span>Precision FC</span>
@@ -614,6 +784,13 @@ function showTab(btn, panelId){
   const card = btn.closest('.card');
   card.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   card.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+
+function showSiteTab(btn, panelId){
+  document.querySelectorAll('.site-tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.site-panel').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById(panelId).classList.add('active');
 }
