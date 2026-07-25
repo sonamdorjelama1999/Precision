@@ -351,6 +351,25 @@
     background:var(--surface);border:1px solid var(--line);border-radius:2px;
     padding:20px 22px;margin-bottom:16px;
   }
+
+  .motm-list{display:flex;flex-direction:column;}
+  .motm-list-row{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:14px 0;border-bottom:1px solid var(--line-soft);
+  }
+  .motm-list-row:last-child{border-bottom:none;}
+  .motm-list-match{display:flex;flex-direction:column;gap:2px;}
+  .motm-list-date{
+    font-family:'Oswald', sans-serif;font-weight:600;font-size:13px;color:var(--text-dim);
+    letter-spacing:.02em;
+  }
+  .motm-list-fixture{font-size:11px;color:var(--text-faint);}
+  .motm-list-name{
+    font-family:'Oswald', sans-serif;font-weight:700;font-size:17px;color:var(--amber);
+  }
+  .motm-list-team{
+    font-size:10px;color:var(--text-faint);letter-spacing:.04em;margin-top:2px;
+  }
   .board-title{
     font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);
     margin-bottom:16px;
@@ -478,6 +497,7 @@
     <button class="site-tab-btn" onclick="showSiteTab(this,'site-fixtures')">Fixtures</button>
     <button class="site-tab-btn" onclick="showSiteTab(this,'site-stats')">Goal stats</button>
     <button class="site-tab-btn" onclick="showSiteTab(this,'site-overall')">Overall stats</button>
+    <button class="site-tab-btn" onclick="showSiteTab(this,'site-motm')">Man of the Match</button>
   </div>
 
   <div id="site-latest" class="site-panel active">
@@ -705,44 +725,6 @@
 
     <div class="past-label">Recent results</div>
 
-    <!-- Match 1 : FT -->
-    <div class="card decided">
-      <div class="card-top">
-        <div class="date-block">
-          <div class="day">Wednesday</div>
-          <div class="date">Jul 22, 2026</div>
-        </div>
-        <div class="badge ft">Full time</div>
-      </div>
-
-      <div class="matchup">
-        <div class="team us">Precision FC</div>
-        <div class="vs-slot">
-          <div class="score">11<span class="sep">–</span>13</div>
-        </div>
-        <div class="team them">Gokarneswor FC</div>
-      </div>
-
-      <div class="meta">
-        <div class="meta-item">
-          <div class="meta-label">Format</div>
-          <div class="meta-value">5-a-side</div>
-        </div>
-        <div class="meta-item">
-          <div class="meta-label">Venue</div>
-          <div class="meta-value">Gokarneswor Futsal</div>
-        </div>
-        <div class="meta-item">
-          <div class="meta-label">Result</div>
-          <div class="meta-value" style="color:var(--red)">Loss, 11–13</div>
-        </div>
-      </div>
-
-      <div class="motm">
-        <div class="motm-label">Man of the Match</div>
-        <div class="motm-name">Suman</div>
-      </div>
-    </div>
 
     <!-- Match 2 : FT -->
     <div class="card decided">
@@ -917,15 +899,15 @@
 
     <div class="stat-summary">
       <div class="stat-card">
-        <div class="num">25</div>
+        <div class="num">14</div>
         <div class="lbl">Goals scored</div>
       </div>
       <div class="stat-card">
-        <div class="num">24</div>
+        <div class="num">11</div>
         <div class="lbl">Goals conceded</div>
       </div>
       <div class="stat-card">
-        <div class="num">3</div>
+        <div class="num">2</div>
         <div class="lbl">Matches played</div>
       </div>
     </div>
@@ -1003,20 +985,12 @@
         <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
         <div class="board-goals">1</div>
       </div>
-      <div class="stats-note">Based on the goal-by-goal breakdowns recorded for the Jul 23 and Jul 25 matches. The Jul 22 match wasn't logged by individual scorer, so its 11 goals aren't reflected in this leaderboard.</div>
+      <div class="stats-note">Covers goal-by-goal breakdowns recorded for the Jul 23 and Jul 25 matches.</div>
     </div>
 
     <div class="scorers-board">
       <div class="board-title">Goals by match</div>
       <div class="goals-by-match">
-        <div class="gbm-row">
-          <div class="gbm-date">Jul 22 · Gokarneswor</div>
-          <div class="gbm-bars">
-            <div class="gbm-for" style="flex:11"></div>
-            <div class="gbm-against" style="flex:13"></div>
-          </div>
-          <div class="gbm-score">11–13</div>
-        </div>
         <div class="gbm-row">
           <div class="gbm-date">Jul 23 · Thanka</div>
           <div class="gbm-bars">
@@ -1043,15 +1017,15 @@
 
     <div class="stat-summary">
       <div class="stat-card">
-        <div class="num">49</div>
+        <div class="num">25</div>
         <div class="lbl">Total goals</div>
       </div>
       <div class="stat-card">
-        <div class="num">4</div>
+        <div class="num">3</div>
         <div class="lbl">Teams involved</div>
       </div>
       <div class="stat-card">
-        <div class="num">3</div>
+        <div class="num">2</div>
         <div class="lbl">Matches played</div>
       </div>
     </div>
@@ -1169,9 +1143,39 @@
 
   </div>
 
+  <div id="site-motm" class="site-panel">
+
+    <div class="scorers-board">
+      <div class="board-title">Man of the Match — by fixture</div>
+      <div class="motm-list">
+        <div class="motm-list-row">
+          <div class="motm-list-match">
+            <div class="motm-list-date">Jul 23, 2026</div>
+            <div class="motm-list-fixture">Precision FC 11–8 Thanka FC</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="motm-list-name">Ashok</div>
+            <div class="motm-list-team">Precision FC</div>
+          </div>
+        </div>
+        <div class="motm-list-row">
+          <div class="motm-list-match">
+            <div class="motm-list-date">Jul 25, 2026</div>
+            <div class="motm-list-fixture">Precision FC 3–3 Yangrima FC</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="motm-list-name">Aditya</div>
+            <div class="motm-list-team">Precision FC</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
   <footer>
     <span>Precision FC</span>
-    <span>1W–1L–1D</span>
+    <span>1W–1D</span>
   </footer>
 
 </div>
