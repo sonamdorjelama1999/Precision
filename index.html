@@ -371,6 +371,36 @@
   }
   .board-bar-wrap{flex:1;height:6px;background:var(--line-soft);border-radius:3px;overflow:hidden;}
   .board-bar{height:100%;background:var(--amber);}
+
+  .top-scorer-spotlight{
+    position:relative;
+    background:linear-gradient(135deg, rgba(255,176,32,.14), rgba(255,176,32,.03));
+    border:1px solid var(--amber);
+    border-radius:2px;
+    padding:20px 22px;
+    margin-bottom:16px;
+    display:flex;align-items:center;justify-content:space-between;
+    gap:16px;
+  }
+  .top-scorer-spotlight .ts-tag{
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);
+    display:flex;align-items:center;gap:8px;
+  }
+  .top-scorer-spotlight .ts-name{
+    font-family:'Oswald', sans-serif;font-weight:700;font-size:24px;color:var(--text);
+    letter-spacing:.01em;
+  }
+  .top-scorer-spotlight .ts-team{
+    font-size:11px;color:var(--text-dim);margin-top:4px;letter-spacing:.04em;
+  }
+  .top-scorer-spotlight .ts-goals{
+    font-family:'Oswald', sans-serif;font-weight:700;font-size:34px;color:var(--amber);
+    line-height:1;
+  }
+  .top-scorer-spotlight .ts-goals-lbl{
+    font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);
+    text-align:center;margin-top:4px;
+  }
   .board-goals{
     font-family:'Oswald', sans-serif;font-weight:700;font-size:14px;color:var(--amber);
     min-width:24px;text-align:right;
@@ -930,6 +960,18 @@
       </div>
     </div>
 
+    <div class="top-scorer-spotlight">
+      <div>
+        <div class="ts-tag">Top scorer</div>
+        <div class="ts-name">Tenzin</div>
+        <div class="ts-team">Thanka FC / Yangrima FC</div>
+      </div>
+      <div style="text-align:center;">
+        <div class="ts-goals">3</div>
+        <div class="ts-goals-lbl">Goals</div>
+      </div>
+    </div>
+
     <div class="scorers-board">
       <div class="board-title">All scorers — every team combined</div>
       <div class="board-row">
@@ -952,13 +994,13 @@
       </div>
       <div class="board-row">
         <div class="board-rank">3</div>
-        <div class="board-name">Phurpa <span class="board-team">Thanka FC</span></div>
+        <div class="board-name">Dorje / Dorjee <span class="board-team">Thanka FC / Yangrima FC</span></div>
         <div class="board-bar-wrap"><div class="board-bar" style="width:67%"></div></div>
         <div class="board-goals">2</div>
       </div>
       <div class="board-row">
         <div class="board-rank">3</div>
-        <div class="board-name">Tenzin <span class="board-team">Yangrima FC</span></div>
+        <div class="board-name">Phurpa <span class="board-team">Thanka FC</span></div>
         <div class="board-bar-wrap"><div class="board-bar" style="width:67%"></div></div>
         <div class="board-goals">2</div>
       </div>
@@ -983,18 +1025,6 @@
       <div class="board-row">
         <div class="board-rank">6</div>
         <div class="board-name">Dhurge <span class="board-team">Precision FC</span></div>
-        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
-        <div class="board-goals">1</div>
-      </div>
-      <div class="board-row">
-        <div class="board-rank">6</div>
-        <div class="board-name">Dorje <span class="board-team">Thanka FC</span></div>
-        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
-        <div class="board-goals">1</div>
-      </div>
-      <div class="board-row">
-        <div class="board-rank">6</div>
-        <div class="board-name">Dorjee <span class="board-team">Yangrima FC</span></div>
         <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
         <div class="board-goals">1</div>
       </div>
@@ -1030,17 +1060,11 @@
       </div>
       <div class="board-row">
         <div class="board-rank">6</div>
-        <div class="board-name">Tenzin <span class="board-team">Thanka FC</span></div>
-        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
-        <div class="board-goals">1</div>
-      </div>
-      <div class="board-row">
-        <div class="board-rank">6</div>
         <div class="board-name">Theeng <span class="board-team">Thanka FC</span></div>
         <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
         <div class="board-goals">1</div>
       </div>
-      <div class="stats-note">Covers goal-by-goal breakdowns from the Jul 23 and Jul 25 matches. The Jul 22 match (Precision FC 11–13 Gokarneswor FC) wasn't logged by individual scorer, so those 24 goals aren't reflected here.</div>
+      <div class="stats-note">Tenzin (featured above) and Dorje/Dorjee appeared in both the Jul 23 (Thanka FC) and Jul 25 (Yangrima FC) scoresheets, so their goals from both matches are combined into one entry. Covers goal-by-goal breakdowns from the Jul 23 and Jul 25 matches — the Jul 22 match (Precision FC 11–13 Gokarneswor FC) wasn't logged by individual scorer, so those 24 goals aren't reflected here.</div>
     </div>
 
   </div>
