@@ -70,7 +70,6 @@
     position:relative;
     width:100%;
     height:320px;
-    margin-top:28px;
     border-radius:2px;
     overflow:hidden;
     border:1px solid var(--line);
@@ -316,13 +315,21 @@
 
   /* ---- site-level tabs ---- */
   .site-tabs{
-    display:flex;gap:8px;margin:28px 0 24px;
+    display:flex;gap:6px;margin:28px 0 24px;
+    overflow-x:auto;overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding-bottom:2px;
+    -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
+    mask-image:linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
   }
+  .site-tabs::-webkit-scrollbar{display:none;}
   .site-tab-btn{
+    flex:0 0 auto;white-space:nowrap;
     background:none;border:1px solid var(--line);color:var(--text-faint);
     font-family:'Oswald', sans-serif;font-weight:600;
-    font-size:13px;letter-spacing:.08em;text-transform:uppercase;
-    padding:10px 18px;cursor:pointer;border-radius:2px;
+    font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+    padding:8px 14px;cursor:pointer;border-radius:2px;
     transition:color .15s ease,border-color .15s ease;
   }
   .site-tab-btn:hover{color:var(--text-dim);}
@@ -330,6 +337,13 @@
 
   .site-panel{display:none;}
   .site-panel.active{display:block;}
+
+  .stats-hub-tabs{
+    display:flex;gap:2px;margin-bottom:20px;
+  }
+  .stats-hub-tabs .tab-btn{flex:1;}
+  .stats-hub-panel{display:none;}
+  .stats-hub-panel.active{display:block;}
 
   /* ---- goal stats page ---- */
   .stat-summary{
@@ -370,6 +384,24 @@
   .motm-list-team{
     font-size:10px;color:var(--text-faint);letter-spacing:.04em;margin-top:2px;
   }
+
+  .data-table{
+    width:100%;border-collapse:collapse;
+  }
+  .data-table th{
+    text-align:left;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--text-faint);font-weight:500;padding:0 0 12px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .data-table td{
+    padding:12px 0;border-bottom:1px solid var(--line-soft);
+    font-size:13px;color:var(--text-dim);vertical-align:top;
+  }
+  .data-table tr:last-child td{border-bottom:none;}
+  .data-table td.dt-player{
+    font-family:'Oswald', sans-serif;font-weight:700;font-size:14px;color:var(--amber);
+  }
+  .data-table th.dt-right, .data-table td.dt-right{text-align:right;}
   .board-title{
     font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);
     margin-bottom:16px;
@@ -473,18 +505,6 @@
 <div class="wrap">
 
   <header>
-    <div class="wordmark">
-      <svg class="reticle" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="50" cy="50" r="34" stroke="#FFB020" stroke-width="4"/>
-        <circle cx="50" cy="50" r="6" fill="#FFB020"/>
-        <line x1="50" y1="2" x2="50" y2="20" stroke="#FFB020" stroke-width="4"/>
-        <line x1="50" y1="80" x2="50" y2="98" stroke="#FFB020" stroke-width="4"/>
-        <line x1="2" y1="50" x2="20" y2="50" stroke="#FFB020" stroke-width="4"/>
-        <line x1="80" y1="50" x2="98" y2="50" stroke="#FFB020" stroke-width="4"/>
-      </svg>
-      Precision FC
-    </div>
-
     <div class="hero">
       <img src="team-photo.png" alt="Precision FC team photo" />
       <div class="hero-caption">Precision FC — squad photo</div>
@@ -492,15 +512,20 @@
   </header>
 
   <div class="site-tabs">
-    <button class="site-tab-btn active" onclick="showSiteTab(this,'site-latest')">Latest match</button>
-    <button class="site-tab-btn" onclick="showSiteTab(this,'site-upcoming')">Upcoming match</button>
-    <button class="site-tab-btn" onclick="showSiteTab(this,'site-fixtures')">Fixtures</button>
-    <button class="site-tab-btn" onclick="showSiteTab(this,'site-stats')">Goal stats</button>
-    <button class="site-tab-btn" onclick="showSiteTab(this,'site-overall')">Overall stats</button>
-    <button class="site-tab-btn" onclick="showSiteTab(this,'site-motm')">Man of the Match</button>
+    <button class="site-tab-btn active" onclick="showSiteTab(this,'site-matches-hub')">Matches</button>
+    <button class="site-tab-btn" onclick="showSiteTab(this,'site-stats-hub')">Stats</button>
+    <button class="site-tab-btn" onclick="showSiteTab(this,'site-table')">Table</button>
   </div>
 
-  <div id="site-latest" class="site-panel active">
+  <div id="site-matches-hub" class="site-panel active">
+
+    <div class="stats-hub-tabs">
+      <button class="tab-btn active" onclick="showHubTab(this,'hub-latest')">Latest match</button>
+      <button class="tab-btn" onclick="showHubTab(this,'hub-upcoming')">Upcoming match</button>
+      <button class="tab-btn" onclick="showHubTab(this,'hub-fixtures')">Fixtures</button>
+    </div>
+
+    <div id="hub-latest" class="stats-hub-panel active">
   <div class="fixtures">
 
     <!-- Match 3 : FT (most recent, shown as active/featured) -->
@@ -651,7 +676,8 @@
   </div>
   </div>
 
-  <div id="site-upcoming" class="site-panel">
+
+    <div id="hub-upcoming" class="stats-hub-panel">
   <div class="fixtures">
 
     <!-- Next match : upcoming -->
@@ -720,7 +746,8 @@
   </div>
   </div>
 
-  <div id="site-fixtures" class="site-panel">
+
+    <div id="hub-fixtures" class="stats-hub-panel">
   <div class="fixtures">
 
     <div class="past-label">Recent results</div>
@@ -895,7 +922,18 @@
   </div>
   </div>
 
-  <div id="site-stats" class="site-panel">
+    </div>
+
+
+  <div id="site-stats-hub" class="site-panel">
+
+    <div class="stats-hub-tabs">
+      <button class="tab-btn active" onclick="showHubTab(this,'hub-goal')">Goal stats</button>
+      <button class="tab-btn" onclick="showHubTab(this,'hub-overall')">Overall stats</button>
+      <button class="tab-btn" onclick="showHubTab(this,'hub-motm')">Man of the Match</button>
+    </div>
+
+    <div id="hub-goal" class="stats-hub-panel active">
 
     <div class="stat-summary">
       <div class="stat-card">
@@ -1011,9 +1049,9 @@
       <div class="stats-note"><span style="color:var(--amber)">■</span> Goals for &nbsp; <span style="color:var(--line-soft)">■</span> Goals against</div>
     </div>
 
-  </div>
+    </div>
 
-  <div id="site-overall" class="site-panel">
+    <div id="hub-overall" class="stats-hub-panel">
 
     <div class="stat-summary">
       <div class="stat-card">
@@ -1141,34 +1179,97 @@
       </div>
     </div>
 
-  </div>
+    </div>
 
-  <div id="site-motm" class="site-panel">
+    <div id="hub-motm" class="stats-hub-panel">
 
     <div class="scorers-board">
       <div class="board-title">Man of the Match — by fixture</div>
-      <div class="motm-list">
-        <div class="motm-list-row">
-          <div class="motm-list-match">
-            <div class="motm-list-date">Jul 23, 2026</div>
-            <div class="motm-list-fixture">Precision FC 11–8 Thanka FC</div>
-          </div>
-          <div style="text-align:right;">
-            <div class="motm-list-name">Ashok</div>
-            <div class="motm-list-team">Precision FC</div>
-          </div>
-        </div>
-        <div class="motm-list-row">
-          <div class="motm-list-match">
-            <div class="motm-list-date">Jul 25, 2026</div>
-            <div class="motm-list-fixture">Precision FC 3–3 Yangrima FC</div>
-          </div>
-          <div style="text-align:right;">
-            <div class="motm-list-name">Aditya</div>
-            <div class="motm-list-team">Precision FC</div>
-          </div>
-        </div>
-      </div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Fixture</th>
+            <th>Player</th>
+            <th class="dt-right">Team</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Jul 23, 2026</td>
+            <td>Precision FC 11–8 Thanka FC</td>
+            <td class="dt-player">Ashok</td>
+            <td class="dt-right">Precision FC</td>
+          </tr>
+          <tr>
+            <td>Jul 25, 2026</td>
+            <td>Precision FC 3–3 Yangrima FC</td>
+            <td class="dt-player">Aditya</td>
+            <td class="dt-right">Precision FC</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    </div>
+
+  </div>
+
+  <div id="site-table" class="site-panel">
+
+    <div class="scorers-board">
+      <div class="board-title">Table — all teams played so far</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Team</th>
+            <th class="dt-right">P</th>
+            <th class="dt-right">W</th>
+            <th class="dt-right">D</th>
+            <th class="dt-right">L</th>
+            <th class="dt-right">GF</th>
+            <th class="dt-right">GA</th>
+            <th class="dt-right">GD</th>
+            <th class="dt-right">Pts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="dt-player">Precision FC</td>
+            <td class="dt-right">2</td>
+            <td class="dt-right">1</td>
+            <td class="dt-right">1</td>
+            <td class="dt-right">0</td>
+            <td class="dt-right">14</td>
+            <td class="dt-right">11</td>
+            <td class="dt-right">+3</td>
+            <td class="dt-right">4</td>
+          </tr>
+          <tr>
+            <td class="dt-player">Yangrima FC</td>
+            <td class="dt-right">1</td>
+            <td class="dt-right">0</td>
+            <td class="dt-right">1</td>
+            <td class="dt-right">0</td>
+            <td class="dt-right">3</td>
+            <td class="dt-right">3</td>
+            <td class="dt-right">0</td>
+            <td class="dt-right">1</td>
+          </tr>
+          <tr>
+            <td class="dt-player">Thanka FC</td>
+            <td class="dt-right">1</td>
+            <td class="dt-right">0</td>
+            <td class="dt-right">0</td>
+            <td class="dt-right">1</td>
+            <td class="dt-right">8</td>
+            <td class="dt-right">11</td>
+            <td class="dt-right">−3</td>
+            <td class="dt-right">0</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="stats-note">P = played, W = won, D = drawn, L = lost, GF = goals for, GA = goals against, GD = goal difference, Pts = points (3 for a win, 1 for a draw).</div>
     </div>
 
   </div>
@@ -1192,6 +1293,14 @@ function showTab(btn, panelId){
 function showSiteTab(btn, panelId){
   document.querySelectorAll('.site-tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.site-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+
+function showHubTab(btn, panelId){
+  const hub = btn.closest('.site-panel');
+  hub.querySelectorAll('.stats-hub-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+  hub.querySelectorAll('.stats-hub-panel').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById(panelId).classList.add('active');
 }
