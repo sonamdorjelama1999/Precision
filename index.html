@@ -187,6 +187,18 @@
   .scorer-line{font-size:12px;color:var(--text-dim);}
   .scorer-line.them{text-align:right;}
 
+  .motm{
+    display:flex;align-items:center;justify-content:space-between;
+    border-top:1px solid var(--line-soft);margin-top:14px;padding-top:14px;
+  }
+  .motm-label{
+    font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint);
+  }
+  .motm-name{
+    font-family:'Oswald', sans-serif;font-weight:700;font-size:16px;color:var(--amber);
+    letter-spacing:.02em;
+  }
+
   /* ---- match center tabs ---- */
   .match-tabs{
     display:flex;gap:2px;margin-top:16px;
@@ -353,6 +365,10 @@
     min-width:20px;
   }
   .board-name{flex:1;font-size:14px;color:var(--text);}
+  .board-team{
+    font-size:10px;letter-spacing:.06em;color:var(--text-faint);
+    margin-left:8px;text-transform:uppercase;
+  }
   .board-bar-wrap{flex:1;height:6px;background:var(--line-soft);border-radius:3px;overflow:hidden;}
   .board-bar{height:100%;background:var(--amber);}
   .board-goals{
@@ -407,7 +423,6 @@
       </svg>
       Precision FC
     </div>
-    <div class="tagline">Matchday fixtures — <span>July 2026</span></div>
 
     <div class="hero">
       <img src="team-photo.png" alt="Precision FC team photo" />
@@ -418,26 +433,27 @@
   <div class="site-tabs">
     <button class="site-tab-btn active" onclick="showSiteTab(this,'site-fixtures')">Fixtures</button>
     <button class="site-tab-btn" onclick="showSiteTab(this,'site-stats')">Goal stats</button>
+    <button class="site-tab-btn" onclick="showSiteTab(this,'site-overall')">Overall stats</button>
   </div>
 
   <div id="site-fixtures" class="site-panel active">
   <div class="fixtures">
 
-    <!-- Next match : upcoming (featured) -->
+    <!-- Match 3 : FT (most recent, shown as active/featured) -->
     <div class="card next">
-      <div class="next-label">Next match</div>
+      <div class="next-label">Latest match</div>
       <div class="card-top">
         <div class="date-block">
           <div class="day">Saturday</div>
           <div class="date">Jul 25, 2026</div>
         </div>
-        <div class="badge upcoming">Upcoming</div>
+        <div class="badge ft">Full time</div>
       </div>
 
       <div class="matchup">
         <div class="team us">Precision FC</div>
         <div class="vs-slot">
-          <div class="vs-mark">VS</div>
+          <div class="score">3<span class="sep">–</span>3</div>
         </div>
         <div class="team them">Yangrima FC</div>
       </div>
@@ -452,34 +468,124 @@
           <div class="meta-value">Rumble Futsal</div>
         </div>
         <div class="meta-item">
-          <div class="meta-label">Kickoff</div>
-          <div class="meta-value hl">7:00 – 8:00 AM</div>
+          <div class="meta-label">Result</div>
+          <div class="meta-value" style="color:var(--text-dim)">Draw, 3–3</div>
         </div>
       </div>
 
-      <div class="lineup-cols" style="border-top:1px solid var(--line-soft);margin-top:14px;padding-top:14px;">
-        <div class="us">
-          <div class="lineup-title">Precision FC</div>
-          <div class="player-row"><span class="player-name">Sonam</span></div>
-          <div class="player-row"><span class="player-name">Aditya</span></div>
-          <div class="player-row"><span class="player-name">Messi</span></div>
-          <div class="player-row"><span class="player-name">Suman</span></div>
-          <div class="player-row"><span class="player-name">Sudip</span></div>
-          <div class="player-row"><span class="player-name">Gaurav</span></div>
-          <div class="player-row"><span class="player-name">Ashok</span></div>
-          <div class="player-row"><span class="player-name">Dev bhai</span></div>
+      <details class="details-toggle" open>
+        <summary>Match details</summary>
+
+      <div class="match-tabs">
+        <button class="tab-btn active" onclick="showTab(this,'m3-overview')">Overview</button>
+        <button class="tab-btn" onclick="showTab(this,'m3-timeline')">Timeline</button>
+        <button class="tab-btn" onclick="showTab(this,'m3-lineups')">Lineups</button>
+        <button class="tab-btn" onclick="showTab(this,'m3-stats')">Stats</button>
+      </div>
+
+      <div id="m3-overview" class="tab-panel active">
+        <div class="scorers">
+          <div class="scorer-col">
+            <div class="scorer-label">Precision FC</div>
+            <div class="scorer-line">Raju 22'</div>
+            <div class="scorer-line">Sonam 27'</div>
+            <div class="scorer-line">Aditya 29'</div>
+          </div>
+          <div class="scorer-col">
+            <div class="scorer-label them">Yangrima FC</div>
+            <div class="scorer-line them">Tenzin 17', 19'</div>
+            <div class="scorer-line them">Dorjee 28'</div>
+          </div>
         </div>
-        <div class="them">
-          <div class="lineup-title them">Yangrima FC</div>
-          <div class="player-row"><span class="player-name">Phurpa</span></div>
-          <div class="player-row"><span class="player-name">Tenzin</span></div>
-          <div class="player-row"><span class="player-name">Lhakpa</span></div>
-          <div class="player-row"><span class="player-name">Urgen</span></div>
-          <div class="player-row"><span class="player-name">Dorje</span></div>
-          <div class="player-row"><span class="player-name">Karma</span></div>
-          <div class="player-row"><span class="player-name">Phurba</span></div>
+        <div class="motm">
+          <div class="motm-label">Man of the Match</div>
+          <div class="motm-name">Aditya</div>
         </div>
       </div>
+
+      <div id="m3-timeline" class="tab-panel">
+        <div class="timeline">
+          <div class="tl-row"><span class="tl-us"></span><span class="tl-min">17'</span><span class="tl-them">⚽ Tenzin</span></div>
+          <div class="tl-row"><span class="tl-us"></span><span class="tl-min">19'</span><span class="tl-them">⚽ Tenzin</span></div>
+          <div class="tl-row"><span class="tl-us">⚽ Raju</span><span class="tl-min">22'</span><span class="tl-them"></span></div>
+          <div class="tl-row"><span class="tl-us">⚽ Sonam</span><span class="tl-min">27'</span><span class="tl-them"></span></div>
+          <div class="tl-row"><span class="tl-us"></span><span class="tl-min">28'</span><span class="tl-them">⚽ Dorjee</span></div>
+          <div class="tl-row"><span class="tl-us">⚽ Aditya</span><span class="tl-min">29'</span><span class="tl-them"></span></div>
+        </div>
+      </div>
+
+      <div id="m3-lineups" class="tab-panel">
+        <div class="lineup-cols">
+          <div class="us">
+            <div class="lineup-title">Precision FC</div>
+            <div class="player-row"><span class="player-name">Sonam <span class="goal-dot">⚽</span></span></div>
+            <div class="player-row"><span class="player-name">Sudip</span></div>
+            <div class="player-row"><span class="player-name">Gaurav</span></div>
+            <div class="player-row"><span class="player-name">Suman</span></div>
+            <div class="player-row"><span class="player-name">Sundar</span></div>
+            <div class="player-row"><span class="player-name">Raju <span class="goal-dot">⚽</span></span></div>
+            <div class="player-row"><span class="player-name">Dev bhai</span></div>
+            <div class="player-row"><span class="player-name">Messi</span></div>
+            <div class="player-row"><span class="player-name">Aditya <span class="goal-dot">⚽</span></span></div>
+          </div>
+          <div class="them">
+            <div class="lineup-title them">Yangrima FC</div>
+            <div class="player-row"><span class="player-name">Tenzin <span class="goal-dot">⚽⚽</span></span></div>
+            <div class="player-row"><span class="player-name">Dorjee <span class="goal-dot">⚽</span></span></div>
+            <div class="player-row"><span class="player-name">Phurpa</span></div>
+            <div class="player-row"><span class="player-name">Phurba</span></div>
+            <div class="player-row"><span class="player-name">Mingmar Norbu</span></div>
+            <div class="player-row"><span class="player-name">Urgen</span></div>
+            <div class="player-row"><span class="player-name">Lhakpa Tenjen</span></div>
+            <div class="player-row"><span class="player-name">Chrish</span></div>
+            <div class="player-row"><span class="player-name">Tshering</span></div>
+            <div class="player-row"><span class="player-name">Ada Negtup</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="m3-stats" class="tab-panel">
+        <div class="stat-row">
+          <div class="stat-vals"><span class="us-val">49%</span><span class="them-val">51%</span></div>
+          <div class="stat-label">Possession</div>
+          <div class="stat-bar"><div class="stat-bar-us" style="width:49%"></div><div class="stat-bar-them" style="width:51%"></div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-vals"><span class="us-val">9</span><span class="them-val">10</span></div>
+          <div class="stat-label">Total shots</div>
+          <div class="stat-bar"><div class="stat-bar-us" style="width:47%"></div><div class="stat-bar-them" style="width:53%"></div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-vals"><span class="us-val">5</span><span class="them-val">6</span></div>
+          <div class="stat-label">Shots on target</div>
+          <div class="stat-bar"><div class="stat-bar-us" style="width:45%"></div><div class="stat-bar-them" style="width:55%"></div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-vals"><span class="us-val">4</span><span class="them-val">3</span></div>
+          <div class="stat-label">Corners</div>
+          <div class="stat-bar"><div class="stat-bar-us" style="width:57%"></div><div class="stat-bar-them" style="width:43%"></div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-vals"><span class="us-val">6</span><span class="them-val">5</span></div>
+          <div class="stat-label">Fouls</div>
+          <div class="stat-bar"><div class="stat-bar-us" style="width:55%"></div><div class="stat-bar-them" style="width:45%"></div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-vals"><span class="us-val">1</span><span class="them-val">1</span></div>
+          <div class="stat-label">Yellow cards</div>
+          <div class="stat-bar"><div class="stat-bar-us" style="width:50%"></div><div class="stat-bar-them" style="width:50%"></div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-vals"><span class="us-val">6</span><span class="them-val">4</span></div>
+          <div class="stat-label">Saves</div>
+          <div class="stat-bar"><div class="stat-bar-us" style="width:60%"></div><div class="stat-bar-them" style="width:40%"></div></div>
+        </div>
+      </div>
+      </details>
+    </div>
+
+    <div class="card" style="text-align:center;padding:18px 22px;opacity:.6;">
+      <div class="meta-value" style="color:var(--text-faint);font-size:12px;">No upcoming match scheduled — check back once the next fixture is confirmed.</div>
     </div>
 
     <div class="past-label">Recent results</div>
@@ -516,6 +622,11 @@
           <div class="meta-value" style="color:var(--red)">Loss, 11–13</div>
         </div>
       </div>
+
+      <div class="motm">
+        <div class="motm-label">Man of the Match</div>
+        <div class="motm-name">Suman</div>
+      </div>
     </div>
 
     <!-- Match 2 : FT -->
@@ -551,7 +662,7 @@
         </div>
       </div>
 
-      <details class="details-toggle">
+      <details class="details-toggle" open>
         <summary>Match details</summary>
 
       <div class="match-tabs">
@@ -582,6 +693,10 @@
             <div class="scorer-line them">Dorje 70'</div>
             <div class="scorer-line them">Ronaldo 81'</div>
           </div>
+        </div>
+        <div class="motm">
+          <div class="motm-label">Man of the Match</div>
+          <div class="motm-name">Ashok</div>
         </div>
       </div>
 
@@ -687,15 +802,15 @@
 
     <div class="stat-summary">
       <div class="stat-card">
-        <div class="num">22</div>
+        <div class="num">25</div>
         <div class="lbl">Goals scored</div>
       </div>
       <div class="stat-card">
-        <div class="num">21</div>
+        <div class="num">24</div>
         <div class="lbl">Goals conceded</div>
       </div>
       <div class="stat-card">
-        <div class="num">2</div>
+        <div class="num">3</div>
         <div class="lbl">Matches played</div>
       </div>
     </div>
@@ -744,7 +859,25 @@
         <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
         <div class="board-goals">1</div>
       </div>
-      <div class="stats-note">Based on the goal-by-goal breakdown recorded for the Jul 23 match against Thanka FC. The Jul 22 match wasn't logged by individual scorer, so its 11 goals aren't reflected in this leaderboard.</div>
+      <div class="board-row">
+        <div class="board-rank">3</div>
+        <div class="board-name">Raju</div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
+        <div class="board-goals">1</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">3</div>
+        <div class="board-name">Sonam</div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
+        <div class="board-goals">1</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">3</div>
+        <div class="board-name">Aditya</div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
+        <div class="board-goals">1</div>
+      </div>
+      <div class="stats-note">Based on the goal-by-goal breakdowns recorded for the Jul 23 and Jul 25 matches. The Jul 22 match wasn't logged by individual scorer, so its 11 goals aren't reflected in this leaderboard.</div>
     </div>
 
     <div class="scorers-board">
@@ -766,15 +899,155 @@
           </div>
           <div class="gbm-score">11–8</div>
         </div>
+        <div class="gbm-row">
+          <div class="gbm-date">Jul 25 · Yangrima</div>
+          <div class="gbm-bars">
+            <div class="gbm-for" style="flex:3"></div>
+            <div class="gbm-against" style="flex:3"></div>
+          </div>
+          <div class="gbm-score">3–3</div>
+        </div>
       </div>
       <div class="stats-note"><span style="color:var(--amber)">■</span> Goals for &nbsp; <span style="color:var(--line-soft)">■</span> Goals against</div>
     </div>
 
   </div>
 
+  <div id="site-overall" class="site-panel">
+
+    <div class="stat-summary">
+      <div class="stat-card">
+        <div class="num">49</div>
+        <div class="lbl">Total goals</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">4</div>
+        <div class="lbl">Teams involved</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">3</div>
+        <div class="lbl">Matches played</div>
+      </div>
+    </div>
+
+    <div class="scorers-board">
+      <div class="board-title">All scorers — every team combined</div>
+      <div class="board-row">
+        <div class="board-rank">1</div>
+        <div class="board-name">Ashok <span class="board-team">Precision FC</span></div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:100%"></div></div>
+        <div class="board-goals">3</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">1</div>
+        <div class="board-name">Santosh Dai <span class="board-team">Precision FC</span></div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:100%"></div></div>
+        <div class="board-goals">3</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">3</div>
+        <div class="board-name">Brazil <span class="board-team">Thanka FC</span></div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:67%"></div></div>
+        <div class="board-goals">2</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">3</div>
+        <div class="board-name">Phurpa <span class="board-team">Thanka FC</span></div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:67%"></div></div>
+        <div class="board-goals">2</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">3</div>
+        <div class="board-name">Tenzin <span class="board-team">Yangrima FC</span></div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:67%"></div></div>
+        <div class="board-goals">2</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">6</div>
+        <div class="board-name">Aditya <span class="board-team">Precision FC</span></div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
+        <div class="board-goals">1</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">6</div>
+        <div class="board-name">Anish Bhai <span class="board-team">Precision FC</span></div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
+        <div class="board-goals">1</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">6</div>
+        <div class="board-name">Dev bhai <span class="board-team">Precision FC</span></div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
+        <div class="board-goals">1</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">6</div>
+        <div class="board-name">Dhurge <span class="board-team">Precision FC</span></div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
+        <div class="board-goals">1</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">6</div>
+        <div class="board-name">Dorje <span class="board-team">Thanka FC</span></div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
+        <div class="board-goals">1</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">6</div>
+        <div class="board-name">Dorjee <span class="board-team">Yangrima FC</span></div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
+        <div class="board-goals">1</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">6</div>
+        <div class="board-name">Messi <span class="board-team">Precision FC</span></div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
+        <div class="board-goals">1</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">6</div>
+        <div class="board-name">Raju <span class="board-team">Precision FC</span></div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
+        <div class="board-goals">1</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">6</div>
+        <div class="board-name">Ronaldo <span class="board-team">Thanka FC</span></div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
+        <div class="board-goals">1</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">6</div>
+        <div class="board-name">Sonam <span class="board-team">Precision FC</span></div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
+        <div class="board-goals">1</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">6</div>
+        <div class="board-name">Sudip <span class="board-team">Precision FC</span></div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
+        <div class="board-goals">1</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">6</div>
+        <div class="board-name">Tenzin <span class="board-team">Thanka FC</span></div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
+        <div class="board-goals">1</div>
+      </div>
+      <div class="board-row">
+        <div class="board-rank">6</div>
+        <div class="board-name">Theeng <span class="board-team">Thanka FC</span></div>
+        <div class="board-bar-wrap"><div class="board-bar" style="width:33%"></div></div>
+        <div class="board-goals">1</div>
+      </div>
+      <div class="stats-note">Covers goal-by-goal breakdowns from the Jul 23 and Jul 25 matches. The Jul 22 match (Precision FC 11–13 Gokarneswor FC) wasn't logged by individual scorer, so those 24 goals aren't reflected here.</div>
+    </div>
+
+  </div>
+
   <footer>
     <span>Precision FC</span>
-    <span>1W–1L · 1 upcoming</span>
+    <span>1W–1L–1D · 0 upcoming</span>
   </footer>
 
 </div>
