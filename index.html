@@ -268,13 +268,7 @@
   .lineup-cols .them .player-row{justify-content:flex-end;text-align:right;}
   .player-num{
     font-family:'Oswald', sans-serif;font-weight:600;font-size:11px;
-    color:var(--text-faint);
-    width:22px;height:22px;border-radius:50%;
-    background:var(--surface-2);border:1px solid var(--line-soft);
-    display:flex;align-items:center;justify-content:center;
-    flex-shrink:0;
-    filter:blur(3px);
-    user-select:none;
+    color:var(--text-faint);min-width:16px;
   }
   .player-name.scored{color:var(--text);}
   .goal-dot{color:var(--amber);font-size:10px;}
@@ -510,25 +504,17 @@
     font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);
     margin-bottom:16px;
   }
-  .scorer-avatar{
-    width:40px;height:40px;border-radius:50%;
-    object-fit:cover;object-position:center top;
-    border:2px solid var(--line);
-    flex-shrink:0;background:var(--surface-2);
-    overflow:hidden;display:flex;align-items:center;justify-content:center;
-  }
-  .scorer-avatar img{width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;}
-  .scorer-avatar svg{width:24px;height:24px;opacity:.4;}
-  .stat-list-row{
-    display:flex;align-items:center;gap:12px;padding:10px 0;
-    border-bottom:1px solid var(--line-soft);
-  }
-  .stat-list-row:last-child{border-bottom:none;}
+  .stat-list-header{
     display:flex;justify-content:space-between;
     font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);
     padding-bottom:12px;border-bottom:1px solid var(--line-soft);margin-bottom:2px;
   }
   .stat-list{display:flex;flex-direction:column;}
+  .stat-list-row{
+    display:flex;align-items:center;gap:14px;padding:13px 0;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .stat-list-row:last-child{border-bottom:none;}
   .stat-list-rank{
     font-family:'Oswald', sans-serif;font-weight:600;font-size:14px;color:var(--text-faint);
     min-width:18px;
@@ -789,12 +775,12 @@
             <div class="lineup-cols">
               <div class="us">
                 <div class="lineup-title">Precision FC</div>
-                <div class="player-row"><span class="player-num">14</span><span class="player-name">Aditya Neupane</span></div>
+                <div class="player-row"><span class="player-num">14</span><span class="player-name">Aditya Neupane <span class="goal-dot">⚽</span></span></div>
                 <div class="player-row"><span class="player-num">9</span><span class="player-name">Dev Raj</span></div>
                 <div class="player-row"><span class="player-num">15</span><span class="player-name">Gaurab Thulung Rai</span></div>
                 <div class="player-row"><span class="player-num">10</span><span class="player-name">Messi</span></div>
-                <div class="player-row"><span class="player-num">13</span><span class="player-name">Raju Sunuwar</span></div>
-                <div class="player-row"><span class="player-num">3</span><span class="player-name">Sonam Dorje Lama</span></div>
+                <div class="player-row"><span class="player-num">13</span><span class="player-name">Raju Sunuwar <span class="goal-dot">⚽</span></span></div>
+                <div class="player-row"><span class="player-num">3</span><span class="player-name">Sonam Dorje Lama <span class="goal-dot">⚽</span></span></div>
                 <div class="player-row"><span class="player-num">8</span><span class="player-name">Sudip Tamang</span></div>
                 <div class="player-row"><span class="player-num">2</span><span class="player-name">Suman Sherpa</span></div>
                 <div class="player-row"><span class="player-num">19</span><span class="player-name">Sundar Bhandari</span></div>
@@ -803,12 +789,12 @@
                 <div class="lineup-title them">Ama Yangri FC</div>
                 <div class="player-row"><span class="player-name">Ngetup Kun Hyolmo</span><span class="player-num">3</span></div>
                 <div class="player-row"><span class="player-name">Chrish</span><span class="player-num">8</span></div>
-                <div class="player-row"><span class="player-name">Dorze</span><span class="player-num">14</span></div>
+                <div class="player-row"><span class="player-name">Dorze <span class="goal-dot">⚽</span></span><span class="player-num">14</span></div>
                 <div class="player-row"><span class="player-name">Lhakpa Tenjen Lama</span><span class="player-num">22</span></div>
                 <div class="player-row"><span class="player-name">Mingmar Norbu Hyolmo</span><span class="player-num">5</span></div>
                 <div class="player-row"><span class="player-name">Phurba Lama</span><span class="player-num">9</span></div>
                 <div class="player-row"><span class="player-name">Phurpa Hyolmo</span><span class="player-num">17</span></div>
-                <div class="player-row"><span class="player-name">Tenzin Dorje Hyolmo</span><span class="player-num">4</span></div>
+                <div class="player-row"><span class="player-name">Tenzin Dorje Hyolmo <span class="goal-dot">⚽⚽</span></span><span class="player-num">4</span></div>
                 <div class="player-row"><span class="player-name">Tshering</span><span class="player-num">11</span></div>
                 <div class="player-row"><span class="player-name">Urken Hyolmo</span><span class="player-num">1</span></div>
               </div>
@@ -914,26 +900,26 @@
               <div class="us">
                 <div class="lineup-title">Precision FC</div>
                 <div class="player-row"><span class="player-num">14</span><span class="player-name">Aditya Neupane</span></div>
-                <div class="player-row"><span class="player-num">5</span><span class="player-name scored">Anish Bhai</span></div>
-                <div class="player-row"><span class="player-num">11</span><span class="player-name scored">Asok Sunuwar</span></div>
-                <div class="player-row"><span class="player-num">9</span><span class="player-name scored">Dev Raj</span></div>
-                <div class="player-row"><span class="player-num">7</span><span class="player-name scored">Dhurge</span></div>
-                <div class="player-row"><span class="player-num">10</span><span class="player-name scored">Messi</span></div>
+                <div class="player-row"><span class="player-num">5</span><span class="player-name scored">Anish Bhai <span class="goal-dot">⚽</span></span></div>
+                <div class="player-row"><span class="player-num">11</span><span class="player-name scored">Asok Sunuwar <span class="goal-dot">⚽⚽⚽</span></span></div>
+                <div class="player-row"><span class="player-num">9</span><span class="player-name scored">Dev Raj <span class="goal-dot">⚽</span></span></div>
+                <div class="player-row"><span class="player-num">7</span><span class="player-name scored">Dhurge <span class="goal-dot">⚽</span></span></div>
+                <div class="player-row"><span class="player-num">10</span><span class="player-name scored">Messi <span class="goal-dot">⚽</span></span></div>
                 <div class="player-row"><span class="player-num">1</span><span class="player-name">Prabesh</span></div>
-                <div class="player-row"><span class="player-num">6</span><span class="player-name scored">Santosh Dai</span></div>
+                <div class="player-row"><span class="player-num">6</span><span class="player-name scored">Santosh Dai <span class="goal-dot">⚽⚽⚽</span></span></div>
                 <div class="player-row"><span class="player-num">4</span><span class="player-name">Shangbu</span></div>
                 <div class="player-row"><span class="player-num">3</span><span class="player-name">Sonam Dorje Lama</span></div>
-                <div class="player-row"><span class="player-num">8</span><span class="player-name scored">Sudip Tamang</span></div>
+                <div class="player-row"><span class="player-num">8</span><span class="player-name scored">Sudip Tamang <span class="goal-dot">⚽</span></span></div>
                 <div class="player-row"><span class="player-num">2</span><span class="player-name">Suman Sherpa</span></div>
               </div>
               <div class="them">
                 <div class="lineup-title them">Thanka FC</div>
-                <div class="player-row"><span class="player-name scored">Brazil</span><span class="player-num">9</span></div>
-                <div class="player-row"><span class="player-name scored">Dorze</span><span class="player-num">8</span></div>
-                <div class="player-row"><span class="player-name scored">Phurpa Hyolmo</span><span class="player-num">10</span></div>
-                <div class="player-row"><span class="player-name scored">Ronaldo</span><span class="player-num">11</span></div>
-                <div class="player-row"><span class="player-name scored">Tenzin Dorje Hyolmo</span><span class="player-num">4</span></div>
-                <div class="player-row"><span class="player-name scored">Theeng</span><span class="player-num">7</span></div>
+                <div class="player-row"><span class="player-name scored">Brazil <span class="goal-dot">⚽⚽</span></span><span class="player-num">9</span></div>
+                <div class="player-row"><span class="player-name scored">Dorze <span class="goal-dot">⚽</span></span><span class="player-num">8</span></div>
+                <div class="player-row"><span class="player-name scored">Phurpa Hyolmo <span class="goal-dot">⚽⚽</span></span><span class="player-num">10</span></div>
+                <div class="player-row"><span class="player-name scored">Ronaldo <span class="goal-dot">⚽</span></span><span class="player-num">11</span></div>
+                <div class="player-row"><span class="player-name scored">Tenzin Dorje Hyolmo <span class="goal-dot">⚽</span></span><span class="player-num">4</span></div>
+                <div class="player-row"><span class="player-name scored">Theeng <span class="goal-dot">⚽</span></span><span class="player-num">7</span></div>
               </div>
             </div>
           </div>
@@ -981,7 +967,6 @@
       <div class="stat-list">
         <div class="stat-list-row">
           <div class="stat-list-rank">1</div>
-          <div class="scorer-avatar"></div>
           <div class="stat-list-info">
             <div class="stat-list-name">Asok Sunuwar</div>
             <div class="stat-list-team">Precision FC</div>
@@ -990,7 +975,6 @@
         </div>
         <div class="stat-list-row">
           <div class="stat-list-rank">1</div>
-          <div class="scorer-avatar"></div>
           <div class="stat-list-info">
             <div class="stat-list-name">Santosh Dai</div>
             <div class="stat-list-team">Precision FC</div>
@@ -999,7 +983,6 @@
         </div>
         <div class="stat-list-row">
           <div class="stat-list-rank">1</div>
-          <div class="scorer-avatar"></div>
           <div class="stat-list-info">
             <div class="stat-list-name">Tenzin Dorje Hyolmo</div>
             <div class="stat-list-team">Thanka FC / Ama Yangri FC</div>
@@ -1008,7 +991,6 @@
         </div>
         <div class="stat-list-row">
           <div class="stat-list-rank">4</div>
-          <div class="scorer-avatar"></div>
           <div class="stat-list-info">
             <div class="stat-list-name">Brazil</div>
             <div class="stat-list-team">Thanka FC</div>
@@ -1017,7 +999,6 @@
         </div>
         <div class="stat-list-row">
           <div class="stat-list-rank">4</div>
-          <div class="scorer-avatar"></div>
           <div class="stat-list-info">
             <div class="stat-list-name">Dorze</div>
             <div class="stat-list-team">Thanka FC / Ama Yangri FC</div>
@@ -1026,7 +1007,6 @@
         </div>
         <div class="stat-list-row">
           <div class="stat-list-rank">4</div>
-          <div class="scorer-avatar"></div>
           <div class="stat-list-info">
             <div class="stat-list-name">Phurpa Hyolmo</div>
             <div class="stat-list-team">Thanka FC</div>
@@ -1035,7 +1015,6 @@
         </div>
         <div class="stat-list-row">
           <div class="stat-list-rank">7</div>
-          <div class="scorer-avatar"></div>
           <div class="stat-list-info">
             <div class="stat-list-name">Aditya Neupane</div>
             <div class="stat-list-team">Precision FC</div>
@@ -1044,7 +1023,6 @@
         </div>
         <div class="stat-list-row">
           <div class="stat-list-rank">7</div>
-          <div class="scorer-avatar"></div>
           <div class="stat-list-info">
             <div class="stat-list-name">Anish Bhai</div>
             <div class="stat-list-team">Precision FC</div>
@@ -1053,7 +1031,6 @@
         </div>
         <div class="stat-list-row">
           <div class="stat-list-rank">7</div>
-          <div class="scorer-avatar"></div>
           <div class="stat-list-info">
             <div class="stat-list-name">Dev Raj</div>
             <div class="stat-list-team">Precision FC</div>
@@ -1062,7 +1039,6 @@
         </div>
         <div class="stat-list-row">
           <div class="stat-list-rank">7</div>
-          <div class="scorer-avatar"></div>
           <div class="stat-list-info">
             <div class="stat-list-name">Dhurge</div>
             <div class="stat-list-team">Precision FC</div>
@@ -1071,7 +1047,6 @@
         </div>
         <div class="stat-list-row">
           <div class="stat-list-rank">7</div>
-          <div class="scorer-avatar"></div>
           <div class="stat-list-info">
             <div class="stat-list-name">Messi</div>
             <div class="stat-list-team">Precision FC</div>
@@ -1080,7 +1055,6 @@
         </div>
         <div class="stat-list-row">
           <div class="stat-list-rank">7</div>
-          <div class="scorer-avatar"></div>
           <div class="stat-list-info">
             <div class="stat-list-name">Raju Sunuwar</div>
             <div class="stat-list-team">Precision FC</div>
@@ -1089,7 +1063,6 @@
         </div>
         <div class="stat-list-row">
           <div class="stat-list-rank">7</div>
-          <div class="scorer-avatar"></div>
           <div class="stat-list-info">
             <div class="stat-list-name">Ronaldo</div>
             <div class="stat-list-team">Thanka FC</div>
@@ -1098,7 +1071,6 @@
         </div>
         <div class="stat-list-row">
           <div class="stat-list-rank">7</div>
-          <div class="scorer-avatar"></div>
           <div class="stat-list-info">
             <div class="stat-list-name">Sonam Dorje Lama</div>
             <div class="stat-list-team">Precision FC</div>
@@ -1107,7 +1079,6 @@
         </div>
         <div class="stat-list-row">
           <div class="stat-list-rank">7</div>
-          <div class="scorer-avatar"></div>
           <div class="stat-list-info">
             <div class="stat-list-name">Sudip Tamang</div>
             <div class="stat-list-team">Precision FC</div>
@@ -1116,7 +1087,6 @@
         </div>
         <div class="stat-list-row">
           <div class="stat-list-rank">7</div>
-          <div class="scorer-avatar"></div>
           <div class="stat-list-info">
             <div class="stat-list-name">Theeng</div>
             <div class="stat-list-team">Thanka FC</div>
@@ -1211,28 +1181,6 @@ function showHubTab(btn, panelId){
   btn.classList.add('active');
   document.getElementById(panelId).classList.add('active');
 }
-
-function loadScorerAvatars() {
-  const fallbackSVG = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg>';
-
-  document.querySelectorAll('.stat-list-row').forEach(row => {
-    const nameEl = row.querySelector('.stat-list-name');
-    const avatarEl = row.querySelector('.scorer-avatar');
-    if (!nameEl || !avatarEl) return;
-
-    const filename = nameEl.textContent.trim().toLowerCase().replace(/\s+/g, '-') + '.png';
-    const img = new Image();
-    img.onload = () => {
-      img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;';
-      avatarEl.innerHTML = '';
-      avatarEl.appendChild(img);
-    };
-    img.onerror = () => { avatarEl.innerHTML = fallbackSVG; };
-    img.src = filename;
-  });
-}
-
-document.addEventListener('DOMContentLoaded', loadScorerAvatars);
 </script>
 </body>
 </html>
