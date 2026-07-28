@@ -626,26 +626,16 @@
     .scorer-line.them,.scorer-label.them{text-align:left;}
   }
 
-  /* scorer avatar */
   .scorer-avatar{width:38px;height:38px;border-radius:50%;flex-shrink:0;background:var(--surface-2);border:1px solid var(--line);overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .15s;}
   .scorer-avatar:hover{border-color:var(--amber);}
   .scorer-avatar img{width:100%;height:100%;object-fit:cover;object-position:center top;}
   .scorer-avatar svg{width:20px;height:20px;opacity:.35;color:var(--text-faint);}
-
-  /* top scorer highlight */
-  .stat-list-row.top-scorer{background:rgba(255,176,32,.06);margin:0 -18px;padding:13px 18px;border-bottom:1px solid var(--amber-dim);border-top:1px solid var(--amber-dim);}
-  .stat-list-row.top-scorer .stat-list-name{color:var(--amber);}
-  .stat-list-row.top-scorer .stat-list-goals{color:var(--amber);}
-
-  /* photo modal */
   .photo-modal{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.85);align-items:center;justify-content:center;flex-direction:column;gap:14px;backdrop-filter:blur(6px);}
   .photo-modal.open{display:flex;}
   .photo-modal-img{max-width:min(360px,90vw);max-height:70vh;border-radius:8px;object-fit:cover;object-position:center top;border:2px solid var(--line);box-shadow:0 20px 60px rgba(0,0,0,.6);}
   .photo-modal-name{font-family:'Oswald',sans-serif;font-weight:600;font-size:16px;color:var(--text);letter-spacing:.04em;text-transform:uppercase;}
   .photo-modal-team{font-size:12px;color:var(--text-dim);margin-top:2px;}
-  .photo-modal-close{position:absolute;top:18px;right:20px;font-size:22px;color:var(--text-faint);cursor:pointer;line-height:1;background:none;border:none;padding:4px 8px;}
-
-  /* table */
+  .photo-modal-close{position:absolute;top:18px;right:20px;font-size:22px;color:var(--text-faint);cursor:pointer;background:none;border:none;padding:4px 8px;}
   .table-wrap{overflow-x:auto;}
   .standings-table{width:100%;border-collapse:collapse;font-size:13px;}
   .standings-table th{font-family:'Oswald',sans-serif;font-weight:600;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;}
@@ -653,13 +643,24 @@
   .standings-table tr:last-child td{border-bottom:none;}
   .standings-table tr.highlight td{color:var(--text);background:rgba(255,176,32,.04);}
   .standings-table tr.highlight td.team-name{color:var(--amber);}
-  .team-name{font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;letter-spacing:.01em;}
-  .form-pills{display:flex;gap:4px;justify-content:flex-start;}
+  .team-name-td{font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;}
+  .form-pills{display:flex;gap:4px;}
   .form-pill{width:18px;height:18px;border-radius:3px;font-size:9px;font-weight:700;font-family:'Oswald',sans-serif;display:flex;align-items:center;justify-content:center;}
   .form-pill.w{background:var(--green-dim);color:var(--green);}
   .form-pill.d{background:rgba(255,176,32,.15);color:var(--amber);}
   .form-pill.l{background:rgba(210,50,50,.15);color:var(--red);}
   .table-section-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint);margin-bottom:10px;}
+  .team-card{background:var(--surface);border:1px solid var(--line);border-radius:2px;overflow:hidden;margin-bottom:10px;transition:border-color .15s;}
+  .team-card[open]{border-color:var(--amber-dim);}
+  .team-card-summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:14px 18px;}
+  .team-card-summary::-webkit-details-marker{display:none;}
+  .team-card-left{display:flex;align-items:center;gap:12px;}
+  .team-dot{width:8px;height:8px;border-radius:50%;background:var(--amber);flex-shrink:0;}
+  .team-card-name{font-family:'Oswald',sans-serif;font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:var(--text);}
+  .team-card-count{font-size:11px;color:var(--text-faint);margin-top:2px;}
+  .team-info-btn{font-family:'Oswald',sans-serif;font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#08150F;background:var(--green);padding:6px 14px;border-radius:3px;}
+  .team-card[open] .team-info-btn{background:var(--amber);}
+  .team-body{padding:0 18px 16px;border-top:1px solid var(--line-soft);}
 
 </style>
 </head>
@@ -670,6 +671,7 @@
     <button class="site-tab-btn active" onclick="showSiteTab(this,'site-matches-hub')">Matches</button>
     <button class="site-tab-btn" onclick="showSiteTab(this,'site-table')">Table</button>
     <button class="site-tab-btn" onclick="showSiteTab(this,'site-stats-hub')">Stats</button>
+    <button class="site-tab-btn" onclick="showSiteTab(this,'site-teams-hub')">Teams</button>
   </div>
 
   <div id="site-matches-hub" class="site-panel active">
@@ -687,10 +689,7 @@
       <!-- Jul 28 : FT 10-7 -->
       <details class="match-row">
         <summary class="match-summary">
-          <div class="match-time">
-            <span class="day">Mon, Jul 28</span>
-            <span class="clock ft">6:00 PM</span>
-          </div>
+          <div class="match-time"><span class="day">Mon, Jul 28</span><span class="clock ft">6:00 PM</span></div>
           <div class="match-fixture">
             <span class="fx-team home">Precision FC</span>
             <span class="fx-score">10 – 7</span>
@@ -1040,9 +1039,8 @@
   </div>
 
 
-  <div id="site-stats-hub" class="site-panel">
-
-        <div class="scorers-board">
+    <div id="site-stats-hub" class="site-panel">
+    <div class="scorers-board">
       <div class="stat-list-header">
         <span>Player</span>
         <span>Total Goals · <strong>41</strong></span>
@@ -1091,12 +1089,73 @@
       <table class="standings-table">
         <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th><th>Form</th></tr></thead>
         <tbody>
-          <tr class="highlight"><td>1</td><td class="team-name">Precision FC</td><td>3</td><td>2</td><td>1</td><td>0</td><td>24</td><td>18</td><td>+6</td><td><strong>7</strong></td><td><div class="form-pills"><span class="form-pill w">W</span><span class="form-pill d">D</span><span class="form-pill w">W</span></div></td></tr>
-          <tr><td>2</td><td class="team-name">Yangrima FC</td><td>2</td><td>0</td><td>1</td><td>1</td><td>10</td><td>13</td><td>-3</td><td><strong>1</strong></td><td><div class="form-pills"><span class="form-pill d">D</span><span class="form-pill l">L</span></div></td></tr>
-          <tr><td>3</td><td class="team-name">Thanka FC</td><td>1</td><td>0</td><td>0</td><td>1</td><td>8</td><td>11</td><td>-3</td><td><strong>0</strong></td><td><div class="form-pills"><span class="form-pill l">L</span></div></td></tr>
+          <tr class="highlight"><td>1</td><td class="team-name-td">Precision FC</td><td>3</td><td>2</td><td>1</td><td>0</td><td>24</td><td>18</td><td>+6</td><td><strong>7</strong></td><td><div class="form-pills"><span class="form-pill w">W</span><span class="form-pill d">D</span><span class="form-pill w">W</span></div></td></tr>
+          <tr><td>2</td><td class="team-name-td">Yangrima FC</td><td>2</td><td>0</td><td>1</td><td>1</td><td>10</td><td>13</td><td>-3</td><td><strong>1</strong></td><td><div class="form-pills"><span class="form-pill d">D</span><span class="form-pill l">L</span></div></td></tr>
+          <tr><td>3</td><td class="team-name-td">Thanka FC</td><td>1</td><td>0</td><td>0</td><td>1</td><td>8</td><td>11</td><td>-3</td><td><strong>0</strong></td><td><div class="form-pills"><span class="form-pill l">L</span></div></td></tr>
         </tbody>
       </table>
     </div>
+  </div>
+
+  <div id="site-teams-hub" class="site-panel">
+    <details class="team-card">
+      <summary class="team-card-summary">
+        <div class="team-card-left"><span class="team-dot"></span><div><div class="team-card-name">Precision FC</div><div class="team-card-count">18 players</div></div></div>
+        <span class="team-info-btn">Info</span>
+      </summary>
+      <div class="team-body"><div class="stat-list">
+        <div class="stat-list-row"><div class="stat-list-rank">1</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Asok Sunuwar</div><div class="stat-list-team">#11</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">2</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Santosh Dai</div><div class="stat-list-team">#6</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">3</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Sudip Tamang</div><div class="stat-list-team">#8</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">4</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Sonam Dorje Lama</div><div class="stat-list-team">#3</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">5</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Ayush</div><div class="stat-list-team">#7</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">6</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Aditya Neupane</div><div class="stat-list-team">#14</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">7</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Dev Bhai</div><div class="stat-list-team">#9</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">8</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Gaurab Thulung Rai</div><div class="stat-list-team">#15</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">9</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Messi</div><div class="stat-list-team">#10</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">10</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Sawan Tamang</div><div class="stat-list-team">#17</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">11</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Padma Bhai</div><div class="stat-list-team">#18</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">12</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Shangbu Syangdan</div><div class="stat-list-team">#4</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">13</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Anish Bhai</div><div class="stat-list-team">#5</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">14</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Dhurge</div><div class="stat-list-team">#7</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">15</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Raju Sunuwar</div><div class="stat-list-team">#13</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">16</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Prabesh Ghising</div><div class="stat-list-team">#1</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">17</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Suman Sherpa</div><div class="stat-list-team">#2</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">18</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Sundar Bhandari</div><div class="stat-list-team">#19</div></div></div>
+      </div></div>
+    </details>
+    <details class="team-card">
+      <summary class="team-card-summary">
+        <div class="team-card-left"><span class="team-dot"></span><div><div class="team-card-name">Yangrima FC</div><div class="team-card-count">12 players</div></div></div>
+        <span class="team-info-btn">Info</span>
+      </summary>
+      <div class="team-body"><div class="stat-list">
+        <div class="stat-list-row"><div class="stat-list-rank">1</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Tenzin Dorje Hyolmo</div><div class="stat-list-team">#4</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">2</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Phurpa Hyolmo</div><div class="stat-list-team">#17</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">3</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Dorze Hyolmo</div><div class="stat-list-team">#14</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">4</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Lhakpa Tenjen Lama</div><div class="stat-list-team">#22</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">5</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Karma Hyolmo</div><div class="stat-list-team">#6</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">6</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Phurba Lama</div><div class="stat-list-team">#9</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">7</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Mingmar Norbu Hyolmo</div><div class="stat-list-team">#5</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">8</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Urken Hyolmo</div><div class="stat-list-team">#1</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">9</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Sanjip</div><div class="stat-list-team">#19</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">10</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Chrish</div><div class="stat-list-team">#8</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">11</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Ngetup Kun Hyolmo</div><div class="stat-list-team">#3</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">12</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Tshering Yolmo</div><div class="stat-list-team">#11</div></div></div>
+      </div></div>
+    </details>
+    <details class="team-card">
+      <summary class="team-card-summary">
+        <div class="team-card-left"><span class="team-dot"></span><div><div class="team-card-name">Thanka FC</div><div class="team-card-count">4 players</div></div></div>
+        <span class="team-info-btn">Info</span>
+      </summary>
+      <div class="team-body"><div class="stat-list">
+        <div class="stat-list-row"><div class="stat-list-rank">1</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Sakxyam Magar</div><div class="stat-list-team">#9</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">2</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Dorze Hyolmo</div><div class="stat-list-team">#8</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">3</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Samir</div><div class="stat-list-team">#10</div></div></div>
+        <div class="stat-list-row"><div class="stat-list-rank">4</div><div class="scorer-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="stat-list-info"><div class="stat-list-name">Theeng</div><div class="stat-list-team">#7</div></div></div>
+      </div></div>
+    </details>
   </div>
 
 </div>
@@ -1141,36 +1200,25 @@ function loadScorerAvatars() {
       const img = new Image();
       img.onload = () => {
         img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:center top;';
-        avatarEl.innerHTML = '';
-        avatarEl.appendChild(img);
+        avatarEl.innerHTML = ''; avatarEl.appendChild(img);
         avatarEl.onclick = (e) => { e.stopPropagation(); openPhotoModal(src, name, team); };
       };
-      img.onerror = () => tryNext(i + 1);
+      img.onerror = () => tryNext(i+1);
       img.src = src;
     }
     tryNext(0);
   });
 }
-function openPhotoModal(src, name, team) {
-  document.getElementById('photoModalImg').src = src;
-  document.getElementById('photoModalName').textContent = name;
-  document.getElementById('photoModalTeam').textContent = team;
-  document.getElementById('photoModal').classList.add('open');
-}
-function closePhotoModal() {
-  document.getElementById('photoModal').classList.remove('open');
-}
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closePhotoModal(); });
-document.addEventListener('DOMContentLoaded', loadScorerAvatars);
+function openPhotoModal(src,name,team){document.getElementById('photoModalImg').src=src;document.getElementById('photoModalName').textContent=name;document.getElementById('photoModalTeam').textContent=team;document.getElementById('photoModal').classList.add('open');}
+function closePhotoModal(){document.getElementById('photoModal').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closePhotoModal();});
+document.addEventListener('DOMContentLoaded',loadScorerAvatars);
 
 </script>
 <div class="photo-modal" id="photoModal" onclick="closePhotoModal()">
   <button class="photo-modal-close" onclick="closePhotoModal()">✕</button>
   <img class="photo-modal-img" id="photoModalImg" src="" alt="">
-  <div style="text-align:center;">
-    <div class="photo-modal-name" id="photoModalName"></div>
-    <div class="photo-modal-team" id="photoModalTeam"></div>
-  </div>
+  <div style="text-align:center;"><div class="photo-modal-name" id="photoModalName"></div><div class="photo-modal-team" id="photoModalTeam"></div></div>
 </div>
 </body>
 </html>
