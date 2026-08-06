@@ -242,7 +242,7 @@
   .lineup-avatar svg{width:16px;height:16px;opacity:.3;color:var(--text-faint);}
   .player-info{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1;}
   .lineup-cols .them .player-info{align-items:flex-end;text-align:right;}
-  .player-name{font-family:'IBM Plex Mono',monospace;font-weight:400;font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .player-name{font-family:'IBM Plex Mono',monospace;font-weight:400;font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
   .player-sub{font-size:10px;color:var(--text-faint);}
   .player-num{
     font-family:'Oswald', sans-serif;font-weight:600;font-size:11px;
@@ -618,20 +618,58 @@
     font-size:11px;color:var(--text-faint);letter-spacing:.08em;text-transform:uppercase;
   }
 
-  @media (max-width:480px){
-    .match-summary{gap:8px;padding:12px 10px;}
-    .match-time{min-width:46px;}
-    .match-time .clock{display:none;}
-    .match-time .day{display:block;}
-    .fx-team{font-size:11px;}
-    .fx-score,.fx-vs{min-width:32px;font-size:12px;}
-    .info-btn{padding:5px 10px;font-size:10px;}
-    .matchup{flex-direction:column;align-items:stretch;gap:10px;}
-    .team.them{text-align:left;}
-    .vs-slot{flex-direction:row;justify-content:center;min-width:0;}
-    .meta{grid-template-columns:1fr;gap:10px;}
-    .scorers{grid-template-columns:1fr;}
-    .scorer-line.them,.scorer-label.them{text-align:left;}
+  @media (max-width:600px){
+    body{padding:32px 12px 60px;}
+    .wrap{max-width:100%;}
+
+    /* tabs */
+    .site-tabs{gap:4px;}
+    .site-tab-btn{font-size:11px;padding:8px 14px;}
+
+    /* match carousel */
+    .matches-carousel{gap:10px;}
+    .match-row{width:calc(100vw - 48px);}
+    .match-detail{width:calc(100vw - 48px);}
+    .fx-score{font-size:18px;min-width:54px;}
+    .fx-team{font-size:12px;}
+
+    /* standings table */
+    .standings-table th, .standings-table td{padding:8px 4px;font-size:11px;}
+    .standings-table .team-name-td{font-size:12px;}
+    .form-pills{gap:2px;}
+    .form-pill{width:14px;height:14px;font-size:8px;}
+
+    /* stats */
+    .scorers-board{padding:14px 14px;}
+    .stat-list-row{gap:8px;}
+    .stat-list-name{font-size:12px;}
+    .stat-list-goals{font-size:13px;}
+
+    /* match detail */
+    .match-tabs .tab-btn{font-size:10px;padding:8px 4px;}
+    .scorecard-scorers{gap:6px;}
+    .sc-line{font-size:11px;}
+
+    /* lineups */
+    .lineup-cols{grid-template-columns:1fr 1fr;gap:2px;}
+    .player-row{gap:5px;padding:6px 0;}
+    .player-name{font-size:10px;letter-spacing:0;word-break:break-word;white-space:normal;}
+    .lineup-avatar{width:24px;height:24px;border-radius:4px;flex-shrink:0;}
+    .lineup-title{font-size:9px;margin-bottom:6px;}
+    .player-info{min-width:0;}
+
+    /* stats bars */
+    .stat-row-header{gap:6px;}
+    .stat-val-us, .stat-val-them{font-size:11px;}
+    .stat-label{font-size:9px;}
+
+    /* timeline */
+    .tl-us, .tl-them{font-size:11px;}
+    .tl-min{font-size:10px;min-width:28px;}
+
+    /* header */
+    header{padding-bottom:24px;margin-bottom:28px;}
+    .site-section-label{margin:20px 0 10px;}
   }
 
   .scorer-avatar{width:38px;height:38px;border-radius:50%;flex-shrink:0;background:var(--surface-2);border:1px solid var(--line);overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .15s;}
@@ -860,7 +898,6 @@
                 <div class="player-row"><div class="lineup-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="player-info"><span class="player-name">Suman Sherpa</span></div></div>
                 <div class="player-row"><div class="lineup-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="player-info"><span class="player-name">Asok Sunuwar</span></div></div>
                 <div class="player-row"><div class="lineup-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="player-info"><span class="player-name">Sudip Tamang</span></div></div>
-                <div style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint);padding:8px 0 4px;border-top:1px solid var(--line-soft);margin-top:4px;">Bench</div>
                 <div class="player-row"><div class="lineup-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="player-info"><span class="player-name">Raju Sunuwar</span></div></div>
                 <div class="player-row"><div class="lineup-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="player-info"><span class="player-name">Sawan Tamang</span></div></div>
                 <div class="player-row"><div class="lineup-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div><div class="player-info"><span class="player-name">Shangbu Syangdan</span></div></div>
@@ -875,7 +912,6 @@
                 <div class="player-row"><div class="player-info"><span class="player-name">Phurpa Hyolmo</span></div><div class="lineup-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div></div>
                 <div class="player-row"><div class="player-info"><span class="player-name">Karma Hyolmo</span></div><div class="lineup-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div></div>
                 <div class="player-row"><div class="player-info"><span class="player-name">Tenzin Dorje Hyolmo</span></div><div class="lineup-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div></div>
-                <div style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint);padding:8px 0 4px;border-top:1px solid var(--line-soft);margin-top:4px;">Bench</div>
                 <div class="player-row"><div class="player-info"><span class="player-name">Mingmar Norbu Hyolmo</span></div><div class="lineup-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div></div>
                 <div class="player-row"><div class="player-info"><span class="player-name">Sanjip</span></div><div class="lineup-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div></div>
                 <div class="player-row"><div class="player-info"><span class="player-name">Chrish</span></div><div class="lineup-avatar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/></svg></div></div>
@@ -1171,7 +1207,7 @@
   </div>
 
   <div id="tab-stats" class="site-panel">
-    <div id="site-stats-hub" style="display:none;">                    <div class="scorers-board">
+    <div id="site-stats-hub">                    <div class="scorers-board">
       <div style="display:flex;align-items:center;margin-bottom:14px;">
         <span class="stat-list-header-label" style="flex:1;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);">Player</span>
         <button class="filter-icon-btn" id="btn-teams" onclick="switchStatView()" title="View by Team">
